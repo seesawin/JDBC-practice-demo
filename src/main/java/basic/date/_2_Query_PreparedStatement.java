@@ -9,15 +9,17 @@ import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+import basic.AppConfig;
+
 public class _2_Query_PreparedStatement {
 
 	public static void main(String[] args) {
-		String connUrl = "jdbc:mysql://202.182.103.76:3306/FRANK_DEV?useUnicode=true&characterEncoding=utf-8&useSSL=false";
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
+		
 		try {
-			conn = DriverManager.getConnection(connUrl, "frank", "test1234");
+			conn = DriverManager.getConnection(AppConfig.CONN_URL, AppConfig.USER, AppConfig.PWD);
 
 			/*
 			 * The problem with SQL injection is, that a user input is used as part of the SQL
@@ -52,6 +54,7 @@ public class _2_Query_PreparedStatement {
 			rs = ps.executeQuery();
 			_2_Query_PreparedStatement.printRows(rs);
 
+			SELECT_BY_CONDITION = "select * from TB_DATE where d_year_4 = ? and d_datetime = ?";
 			ps = conn.prepareStatement(SELECT_BY_CONDITION);
 			ps.setString(1, "1901");
 

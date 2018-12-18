@@ -6,18 +6,18 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import basic.AppConfig;
+
 public class _1_Query_Statement {
 
 	public static void main(String[] args) {
-		// server location
-		String connUrl = "jdbc:mysql://202.182.103.76:3306/FRANK_DEV?useUnicode=true&characterEncoding=utf-8&useSSL=false";
 		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs = null;
 		
 		try {
 			// connect to database to get the connection to do CRUD
-			conn = DriverManager.getConnection(connUrl, "frank", "test1234");
+			conn = DriverManager.getConnection(AppConfig.CONN_URL, AppConfig.USER, AppConfig.PWD);
 			
 			String SELECT_ALL = "select * from TB_DATE";
 			stmt = conn.createStatement();
@@ -63,7 +63,7 @@ public class _1_Query_Statement {
 			 * #  DATE, 						 #		java.lang.String,		 #
 			 * #  TIME, 						 #		java.sql.Date,	 		 #
 			 * #  DATETIME,			 	 		 #		java.sql.Timestamp,		 #
-			 * #  TIMESTAMP 					 #								 #
+			 * #  TIMESTAMP 					 #		java.sql.Time			 #
 			 * #								 #								 #
 			 * ###################################################################
 			 * 
